@@ -45,12 +45,25 @@ video.
 -->
 ## サンプル
 
-<!--
+<!-- ### p5 sketches
+
 - [BodyPose MoveNet Keypoints](https://editor.p5js.org/ml5/sketches/hMN9GdrO3): Draw the keypoints of the detected body using MoveNet model.
 - [BodyPose BlazePose keypoints](https://editor.p5js.org/ml5/sketches/OukJYAJAb): Draw the keypoints of the detected body using BlazePose model.
--->
-[BodyPose MoveNet キーポイント](https://editor.p5js.org/ml5/sketches/hMN9GdrO3)：MoveNetモデルを使って検出された身体のキーポイントを描画。
-[BodyPose BlazePose キーポイント](https://editor.p5js.org/ml5/sketches/OukJYAJAb)：BlazePoseモデルを使って検出された身体のキーポイントを描画。
+- [BodyPose Skeletal Connections](https://editor.p5js.org/ml5/sketches/YBuqxIH1S): Draw the skeletons on poses for the MoveNet model.
+
+### Video Tutorials
+
+- [Pose Estimation with ml5.js](https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/7-bodypose/pose-detection) by The Coding Train -->
+
+### p5 sketches
+
+- [BodyPose MoveNet キーポイント](https://editor.p5js.org/ml5/sketches/hMN9GdrO3)：MoveNetモデルを使って検出された身体のキーポイントを描画。
+- [BodyPose BlazePose キーポイント](https://editor.p5js.org/ml5/sketches/OukJYAJAb)：BlazePoseモデルを使って検出された身体のキーポイントを描画。
+- [BodyPose Skeletal Connections](https://editor.p5js.org/ml5/sketches/YBuqxIH1S): MoveNetモデルで検出したポーズに骨格を描く。
+
+### Video Tutorials
+
+- [Pose Estimation with ml5.js](https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/7-bodypose/pose-detection) by The Coding Train
 
 <!--
 ## Step-by-Step Guide
@@ -364,6 +377,7 @@ Voila! You have successfully built the BodyPose model to detect and draw body po
 -->
 ?> この段階的なコードガイドで質問や不明点がございましたら、ぜひご連絡ください。[Discord](https://discord.com/invite/3CVauZMSt7)に参加して、改善点をお知らせください。
 
+<<<<<<< HEAD
 
 <!--
 ## Properties
@@ -498,6 +512,8 @@ Voila! You have successfully built the BodyPose model to detect and draw body po
   - Promise
   
 <!--
+=======
+>>>>>>> upstream/main
 ## Methods
 -->
 ## メソッド
@@ -536,7 +552,7 @@ The default and available options are:
 
   ```javascript
   {
-    modelType: "MULTIPOSE_LIGHTNING" // "MULTIPOSE_LIGHTNING", "SINGLEPOSE_LIGHTNING", or "SINGLEPOSE_THUNDER".
+    modelType: "MULTIPOSE_LIGHTNING", // "MULTIPOSE_LIGHTNING", "SINGLEPOSE_LIGHTNING", or "SINGLEPOSE_THUNDER".
     enableSmoothing: true,
     minPoseScore: 0.25,
     multiPoseMaxDimension: 256,
@@ -825,7 +841,7 @@ bodypose.detect(media, ?callback);
 
 ---
 
-### bodypose.getSkeleton()
+### bodypose.getConnections() / bodypose.getSkeleton()
 
 <!--
 This method returns an array of arrays, where each sub-array contains the indices of the connected keypoints.
@@ -833,7 +849,12 @@ This method returns an array of arrays, where each sub-array contains the indice
 このメソッドは、２次元配列を返し、その中の各サブ配列は、接続されたキーポイントのインデックスを含みます。
 
 ```javascript
-const connections = bodypose.getSkeleton();
+const connections;
+function setup() {
+  ...
+  const connections = bodypose.getConnections(); // or bodypose.getSkeleton();
+  ...
+}
 ```
 
 <!--
@@ -841,20 +862,34 @@ const connections = bodypose.getSkeleton();
 -->
 **返り値:**
 
+<<<<<<< HEAD
 <!--
 - **Array**: An array of arrays representing the connections between keypoints. For example, using BlazePose model will returns:
 -->
 - **Array**: キーポイント間の接続を表す二次元配列。例えば、BlazePoseモデルを使用すると次のように返します:
 
+=======
+- **Array**: An array of arrays representing the connections between keypoints. For example, using BlazePose model will return:
+>>>>>>> upstream/main
 
-```js
-[[0, 1], [0, 4], [1, 2], ...[28, 32], [29, 31], [30, 32]];
-```
+  ```js
+  [[0, 1], [0, 4], [1, 2], ...[28, 32], [29, 31], [30, 32]];
+  ```
 
+<<<<<<< HEAD
 <!--
 This array represents the connections between keypoints, please refer to these images to understand the connections:
 -->
 この配列はキーポイント間の接続を表しています。キーポイントの接続を理解するのに、以下の画像を参照してください。
+=======
+  using MoveNet model will return:
+
+  ```js
+  [[0, 1], [0, 2], [1, 3], ...[12, 14], [13, 15], [14, 16]];
+  ```
+
+These arrays represents the connections between keypoints, please refer to these images to understand the connections:
+>>>>>>> upstream/main
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
   <div style="text-align: center;">

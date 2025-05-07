@@ -1,7 +1,7 @@
 <!--
 # Reference Overview
 -->
-# リファレンス概要
+# Overview
 
 <center>
   <img class="header-img" src="assets/header-reference-overview.png" alt="Reference Overview Header Image" >
@@ -11,7 +11,8 @@
 <!--
 Welcome to the ml5.js reference page! Here you can browse the various categories of functionality that ml5.js provides. We have categorized the functionality of ml5.js based on whether you want to customize the model and train with your own data.
 -->
-ml5.jsのリファレンスページへようこそ！ここでは、ml5.jsが提供する様々な機能のカテゴリを閲覧することができます。私達はml5の機能を、モデルをカスタマイズし、独自のデータでトレーニングするかどうかに基づいて分類しました。
+ml5.jsのリファレンスページへようこそ！ここでは、ml5.jsが提供する様々な機能のカテゴリを閲覧することができます。私達はml5の機能を、モデルをカスタマイズし、独自のデータでトレーニングしたいかどうかに基づいて分類しました。
+
 
 <!--
 We currently have 3 categories:
@@ -30,9 +31,9 @@ See the sidebar for more information.
 -->
 - **ml5 モデル**:
   - 「ml5 モデル」はすぐに使用できるモデルを提供し、直接入力（画像、ビデオ、音声、テキストなど）をすることで、出力（ラベルと信頼度スコア）を得ることができます。
-- **ml5 と Teachable Machine**:
-  - 「ml5とTeachable Machine」では、[Teachable Machine](https://teachablemachine.withgoogle.com/)を使用すると、独自の入力（画像・音声・ポーズなど）で、素早く簡単に利用しやすい方法でモデルを作成することができ、ml5に学習済みモデルをインポートすることができます。
-- **自身のモデルをトレーニング！**
-  - 「自身のモデルをトレーニング！」 では、ml5ライブラリを使用し、独自のデータで独自の機械学習モデルを構築し、学習することができます。
+- **ml5 + Teachable Machine**:
+  - 「ml5 + Teachable Machine」では、[Teachable Machine](https://teachablemachine.withgoogle.com/)を使用すると、独自の入力（画像・音声・ポーズなど）で、素早く簡単に利用しやすい方法でモデルを作成することができ、ml5に学習済みモデルをインポートすることができます。
+- **Train your own model!**
+  - 「Train your own model!」 では、ml5ライブラリを使用し、独自のデータで独自の機械学習モデルを構築し、学習することができます。
   
 詳細はサイドバーをご覧ください。

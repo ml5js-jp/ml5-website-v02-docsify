@@ -1,57 +1,62 @@
-# BodySegmentation
+# 人体セグメンテーション
 
 <center>
   <img class="header-img" src="assets/header-body-segmentation.png" alt="BodySegmentation Header Image" >
   <p class="img-credit"> Image Credit: <a href="https://thenounproject.com/creator/ibrandify/" target="_blank" title="ibrandify">ibrandify</a> | <a href='mailto:info@ml5js.org'>Contribute ♥️</a> </p>
 </center>
 
-## Description
+## 説明
 
-The ml5.js BodySegmentation provides two models, `SelfieSegmentation` and `BodyPix`. The `SelfieSegmentation` model focuses on segmenting the human subject from the background. The `BodyPix` model is primarily used for detailed body part segmentation (e.g., distinguishing between different limbs) in images and videos. Although BodyPix can also perform person/background segmentation, it is more computationally intensive.
+Ml5.jsの人体セグメントには、`SelfieSegmentation`と`BodyPix`という2つのモデルがある。`SelfieSegmentation`は、背景から被写体をセグメントする（領域を分割する）ことに重点を置いています。`BodyPix`は、主に画像や動画における体の部位のセグメント（異なる手足の区別など）に使用される。BodyPix は人物と背景の分割も実行できますが、計算量が多くなります。
 
-The ml5.js BodySegmentation is built on top of the [TensorFlow.js BodyPix model and the MediaPipe Selfie Segmentation model](https://github.com/tensorflow/tfjs-models/tree/master/body-segmentation).
+ml5.jsのBodySegmentationは、[TensorFlow.jsのBodyPixとMediaPipeのSelfie Segmentation](https://github.com/tensorflow/tfjs-models/tree/master/body-segmentation)を用いて構築されています。
 
-It provides following functionalities:
-- **Real-time person/background segmentation**: The `SelfieSegmentation` model can segment people from the background in real-time, and is designed to be lightweight. The `BodyPix` model can also be used for this purpose, but is more computationally intensive.
-- **Real-time body part segmentation**: The `BodyPix` model can segment 24 body parts in real-time.
+提供される機能:
+- **リアルタイムの人物/背景セグメンテーション**: `SelfieSegmentation`モデルは、リアルタイムで背景から人物をセグメントすることができ、軽量に設計されている。`BodyPix`モデルもこの目的に使用できるが、計算量が多くなる
+- **リアルタイムに身体部位の検出**: `BodyPix` モデルは、24 の身体部位をリアルタイムでセグメントできます。
 
 ## Quick Start
 
-Run and explore a pre-built example! [This BodySegmentation example](https://editor.p5js.org/ml5/sketches/ruoyal-RC) demonstrates how to use the BodySegmentation `BodyPix` model to segment body parts from webcam input.
+このサンプルプログラムでは，[BodySegmentation `BodyPix`](https://editor.p5js.org/ml5/sketches/ruoyal-RC)を用いて，ウェブカメラの映像から身体部位をセグメントします
 
 </br>
 
 [DEMO](iframes/body-segmentation ":include :type=iframe width=100% height=550px")
 
-## Examples
-- [BodySegmentation Mask Body Parts](https://editor.p5js.org/ml5/sketches/ruoyal-RC): Segment body parts from webcam input.
-- [BodySegmentation Mask Background](https://editor.p5js.org/ml5/sketches/KNsdeNhrp): Segment the background from webcam input.
-- [BodySegmentation Mask Person](https://editor.p5js.org/ml5/sketches/h6TN8umP5): Segment the person from webcam input.
+## 例
+- [BodySegmentation Mask Body Parts](https://editor.p5js.org/ml5/sketches/ruoyal-RC): ウェブカメラの映像から体の部位をセグメントする
+
+- [BodySegmentation Mask Background](https://editor.p5js.org/ml5/sketches/KNsdeNhrp): ウェブカメラの映像から背景をセグメントする
+- [BodySegmentation Mask Person](https://editor.p5js.org/ml5/sketches/h6TN8umP5): ウェブカメラの映像から人をセグメントする
 
 ## Step-by-Step Guide
-Now, let's together build the [BodySegmentation Mask Body Part example](https://editor.p5js.org/ml5/sketches/ruoyal-RC) from scratch, and in the process, learn how to use the BodySegmentation models.
 
-### Create a new project
+[BodySegmentation Mask Body Part](https://editor.p5js.org/ml5/sketches/ruoyal-RC)の制作を通じて，BodySegmentation model の使い方を学びまょう．
+
+
+### 新しいプロジェクトを作成する
 
 To follow along, start by creating an empty project in the [p5.js web editor](https://editor.p5js.org/).
 
-### Set up ml5.js
-Import the ml5.js library in your `index.html` file.
+### ml5.jsをセットアップする
+
+`index.html`にml5.jsをインポートします。
 
 ```html
 <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
 ```
 
-?> If you are not familiar with how to import the ml5.js library and need more detailed guidance, please check out our [Getting Started](/?id=set-up-ml5js) page.
+?> ml5.jsライブラリのインポート方法がよくわからず、より詳細なガイダンスが必要な場合は、[Getting Started](/?id=set-up-ml5js)のページをご覧ください。
 
-### Load model
-Let's open the `sketch.js` file and define a variable to store the BodySegmentation model.
+### modelを読み込む
+`sketch.js`ファイルを開き、BodySegmentationモデルを格納する変数を定義ましょう。
+
 
 ```javascript
 let bodySegmentation;
 ```
 
-In this example, we would like to segment body parts from the webcam input. Let's specify the mask type as `parts` in the options object.
+ここでは、ウェブカメラの入力から体のパーツを分割したいので，optionsオブジェクトでマスクの種類を`parts`に指定しよう。
 
 ```javascript
 let options = {
@@ -59,9 +64,9 @@ let options = {
 };
 ```
 
-?> You can also specify the mask type as `person` or `background` in the options object. For more information on the options object, please refer to the [Methods](/reference/body-segmentation?id=methods) section.
+?> オプションオブジェクトでマスクタイプを `person` または `background` に指定することもできます。オプションオブジェクトの詳細については、[Methods](/reference/body-segmentation?id=methods) セクションを参照してください。
 
-Now, let's preload the BodySegmentation model with the specified options. Using the `preload` function ensures that the model is loaded before the `setup` and `draw` functions are called.
+それでは、BodySegmentationモデルを指定されたオプションでプリロードしてみよう。`preload`関数を使うことで、`setup`関数や`draw`関数が呼ばれる前にモデルが読み込まれるようになります。
 
 ```javascript
 function preload() {
@@ -69,22 +74,22 @@ function preload() {
 }
 ```
 
-### Fetch webcam video
+### ウェブカメラの映像の取得
 
-Let's define a variable `video` to store the webcam video.
+ウェブカメラの映像を扱うために，変数`video`を定義しよう
 
 ```javascript
 let video;
 ```
 
-Resize the canvas dimensions to 640x480, a common resolution for webcams.
+キャンバスの寸法を、ウェブカメラの一般的な解像度である640x480にリサイズする．
 
 ```javascript
 function setup() {
   createCanvas(640, 480);
 ```
 
-Fetch the webcam video, resize it to fit the canvas, and hide it from the display.
+ウェブカメラのビデオを取得し、キャンバスに合うようにサイズを変更し、ディスプレイから非表示にします。
 
 ```javascript
   // Create the video and hide it
@@ -94,14 +99,15 @@ Fetch the webcam video, resize it to fit the canvas, and hide it from the displa
 }
 ```
 
-### Detect body parts with the model
-We can now use the BodySegmentation model to detect body parts from the webcam input. Let's define a variable `segmentation` to store the segmented body parts.
+### modelで体の部位を検出する
+BodySegmentation モデルを使って、ウェブカメラの入力から体のパーツを検出できる。セグメンテーションされた体のパーツを保存する、変数`segmentation`を定義しよう。
+
 
 ```javascript
 let segmentation;
 ```
 
-To start detecting the body parts, in the `setup` function, we need to call the `detectStart` method of the `bodySegmentation` object. This method takes the webcam video as input and a callback function to handle the output.
+体のパーツの検出をするには、`setup`関数の中で、`bodySegmentation`オブジェクトの`detectStart`メソッドを呼び出す必要があります。このメソッドは、ウェブカメラのビデオと，出力を処理するコールバック関数を引数として受け取ります．
 
 ```javascript
 function setup() {
@@ -113,7 +119,8 @@ function setup() {
 }
 ```
 
-The `gotResults()` function is a callback function that will be called when the `bodySegmentation.detectStart()` method detects body parts. Once the body parts are detected, the output `result` will be passed to `gotResults()`, and then saved to the `segmentation` variable.
+
+`gotResults()` は、`bodySegmentation.detectStart()` メソッドがボディパーツを検出したときに呼び出されるコールバック関数です。ボディパーツが検出されると、`result`が `gotResults()` に渡され、`segmentation`に保存されます。
 
 ```javascript
 function gotResults(result) {
@@ -121,10 +128,10 @@ function gotResults(result) {
 }
 ```
 
-?> The `result` object also contains additional properties. For more information on the output object, please refer to the [Methods](/reference/body-segmentation?id=methods) section.
+?> `result` オブジェクトには追加のプロパティもあります。 出力オブジェクトの詳細については、[Methods](/reference/body-segmentation?id=methods) セクションを参照してください。
 
-### Display the segmented body parts
-Before we display the segmented body parts, let's clear the canvas and draw the webcam video.
+### セグメントされた体の部位を表示する
+セグメントされた体のパーツを表示する前に、キャンバスをクリアしてウェブカメラの映像を描画しましょう。
 
 ```javascript
 function draw() {
@@ -132,7 +139,7 @@ function draw() {
   image(video, 0, 0);
 ```
 
-If the `segmentation` variable is not empty, we can display the segmented body parts on the canvas.
+変数`segmentation`が空でなければ、セグメンテーションされたボディパーツをキャンバス上に表示することができる。
 
 ```javascript
   if (segmentation) {
@@ -141,17 +148,18 @@ If the `segmentation` variable is not empty, we can display the segmented body p
 }
 ```
 
-### Run your sketch
-You have successfully built the BodySegmentation Mask Body Part example! Press the <img class="inline-img" src="assets/facemesh-arrow-forward.png" alt="run button icon" aria-hidden="true"> `run` button to see the code in action. You can also find the [complete code](https://editor.p5js.org/ml5/sketches/ruoyal-RC) in the p5.js web editor.
+### スケッチを実行する
+これで、BodySegmentation Mask Body Part のサンプルが作成できました！<img class="inline-img" src="assets/facemesh-arrow-forward.png" alt="run button icon" aria-hidden="true"> `実行`ボタンを押して、コードの動きを見てみましょう。[完全なコード](https://editor.p5js.org/ml5/sketches/ruoyal-RC) はp5.jsウェブエディタでも見ることができます。
 
-?> If you have any questions or spot something unclear in this step-by-step code guide, we'd love to hear from you! Join us on [Discord](https://discord.com/invite/3CVauZMSt7) and let us know how we can make it better.
+?> このステップ・バイ・ステップのコード・ガイドで不明な点や質問があれば、ぜひお寄せください！ [Discord](https://discord.com/invite/3CVauZMSt7)に参加して、どうすればもっと良くなるか教えてください。
+
 
 ## Properties
 
 ### bodySegmentation.modelName
 
 - **Description**
-  - The name of the model being used, typically "BodyPix" or "SelfieSegmentation".
+  - 使用するモデルの名前。通常は "BodyPix" または "SelfieSegmentation"
 - **Type**
   - String
 
@@ -160,7 +168,7 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 ### bodySegmentation.video
 
 - **Description**
-  - The video element on which segmentation is performed.
+  - セグメンテーションが実行されるビデオ
 - **Type**
   - HTMLVideoElement
 
@@ -169,7 +177,7 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 ### bodySegmentation.model
 
 - **Description**
-  - The TensorFlow.js model used for body segmentation.
+  - 身体のセグメンテーションに使用されたTensorFlow.jsモデル
 - **Type**
   - tf.LayersModel
 
@@ -178,7 +186,7 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 ### bodySegmentation.config
 
 - **Description**
-  - Configuration options provided by the user for the model.
+  - モデルに設定可能なオプション
 - **Type**
   - Object
 
@@ -187,7 +195,7 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 ### bodySegmentation.runtimeConfig
 
 - **Description**
-  - Configuration options related to the runtime behavior of the model.
+  - モデルの実行時の動作に関する設定オプション
 - **Type**
   - Object
 
@@ -196,7 +204,8 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 ### bodySegmentation.detectMedia
 
 - **Description**
-  - The media element (image, video, or canvas) on which body segmentation is performed.
+  - 人体セグメンテーションが実行されるメディア要素（画像, 動画, キャンバス）
+
 - **Type**
   - HTMLElement
 
@@ -205,7 +214,7 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 ### bodySegmentation.detectCallback
 
 - **Description**
-  - The callback function to handle body segmentation results.
+  - ボディセグメンテーションの結果を処理するコールバック関数
 - **Type**
   - Function
 
@@ -214,7 +223,7 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 ### bodySegmentation.ready
 
 - **Description**
-  - A promise that resolves when the model has loaded.
+  - モデルがロードされたときに解決されるpromise
 - **Type**
   - Promise
 
@@ -226,7 +235,7 @@ You have successfully built the BodySegmentation Mask Body Part example! Press t
 
 ### ml5.bodySegmentation()
 
-This method is used to initialize the bodySegmentation object.
+This method is used to initialize the bodySegmentation object.このメソッドは bodySegmentation オブジェクトを初期化する。
 
 ```javascript
 const bodySegmentation = ml5.bodySegmentation(?modelName, ?options, ?callback);
@@ -234,13 +243,13 @@ const bodySegmentation = ml5.bodySegmentation(?modelName, ?options, ?callback);
 
 **Parameters:**
 
-- **modelName**: Optional. A string specifying which model to use. Types of model:
-  - _SelfieSegmentation_(default): A model that can be used to segment people from the background.
-  - _BodyPix_: A model that can be used to segment people and body parts.
+- **modelName**: 使用するモデルを指定する文字列。モデルの種類:
+  - _SelfieSegmentation_(default): 背景から人をセグメントするために使用するモデル
+  - _BodyPix_: 人物や体の一部をセグメントするために使用できるモデル
 
 
 
-- **options**: Optional. An object to change the default configuration of the model. See the example options object:
+- **options**: オプション.モデルのデフォルト設定を変更するためのオブジェクト。オプションオブジェクトの例を参照してください:
 
   ```javascript
   {
@@ -251,13 +260,15 @@ const bodySegmentation = ml5.bodySegmentation(?modelName, ?options, ?callback);
   }
   ```
 
-  Important Option:
-  - _maskType_: The type of mask to output. The options are:
-    - _background_: A mask of the background. The result is an image with transparent pixels on the background and black pixels on the person.
-    - _person_: A mask of the person. The result is an image with black pixels on the background and transparent pixels on the person.
-    - _parts_: **BodyPix** only. A mask of the body parts. The result is an image with white pixels on the background and various color pixels for each body part.
-  - _flipped_ - Optional
-    - Boolean: Flip the result horizontally. Defaults to false.
+  重要なオプション:
+  - _maskType_: 出力するマスクのタイプ。以下オプション:
+    - _background_:背景のマスク。その結果、背景が透明なピクセルで、人物が黒いピクセルの画像になる。
+    - _person_:人のマスク。その結果、背景は黒いピクセルで、人物は透明なピクセルを持つ画像になる。
+    - _parts_: **BodyPix** のみ.体の部分のマスク。その結果、背景が白いピクセルで、体は部位ごとにさまざまな色のピクセルで塗り分けられた画像になる
+  - _flipped_ - オプション
+    - Boolean: 結果を水平に反転する。デフォルトはfalse。
+  
+  
 
   [More info on options for SelfieSegmentation model with tfjs runtime](https://github.com/tensorflow/tfjs-models/tree/master/body-segmentation/src/selfie_segmentation_tfjs#create-a-detector).
 
@@ -265,17 +276,17 @@ const bodySegmentation = ml5.bodySegmentation(?modelName, ?options, ?callback);
 
   [More info on options for BodyPix model.](https://github.com/tensorflow/tfjs-models/blob/master/body-segmentation/src/body_pix/README.md#create-a-detector)
 
-- **callback(bodySegmentation, error)**: Optional. A function to run once the model has been loaded. Alternatively, call `ml5.bodySegmentation()` within the p5 `preload` function.
+- **callback(bodySegmentation, error)**: オプション. モデルがロードされたら実行する関数。または、p5 `preload`関数内で`ml5.bodySegmentation()`を呼び出します
 
 **Returns:**
 
-- **Object**: The bodySegmentation object. This object contains the methods to start and stop the body segment detection process.
+- **Object**: The bodySegmentation object．このオブジェクトには、ボディセグメント検出処理を開始および停止するメソッドが含まれています。
 
 ---
 
 ### bodySegmentation.detectStart()
 
-This method repeatedly outputs segmentation masks on an image media through a callback function.
+このメソッドは、コールバック関数を通じて、画像メディア上のセグメンテーションマスクを繰り返し出力する。
 
 ```javascript
 bodySegmentation.detectStart(media, callback);
@@ -283,11 +294,12 @@ bodySegmentation.detectStart(media, callback);
 
 **Parameters:**
 
-- **media**: An HTML or p5.js image, video, or canvas element to run the segmentation on.
+- **media**: セグメンテーションを実行するHTMLまたはp5.jsの画像、動画、またはcanvas
 
-- **callback(output, error)**: Optional. A callback function to handle the results of the body segmentation.
+- **callback(output, error)**: 設定.ボディ・セグメンテーションの結果を処理するコールバック関数。
 
-The `output` will contain an object with the following properties. Based on the `maskType` option, the `mask` (and `maskImageData`) will contain either a mask of the detected background, or a mask of the detected persons, or a (colored) mask of the detected body parts of the detected persons.
+`output`には、以下のプロパティを持つオブジェクトが含まれます。 Based on the `maskType` オプションに基づいて，`mask` （および `maskImageData`）は、検出 された背景のマスクか、検出された人物のマスクか、または検出された人物の身体部分の（色付き）マスクのいずれかを含む。
+
 
   ```javascript
   {
@@ -298,18 +310,18 @@ The `output` will contain an object with the following properties. Based on the 
   }
   ```
 
-The `data` array contains the underlying segmentation result of the image, stored as one number per pixel of the input image. (With the BodyPix model, the right hand is e.g. the number 11, which is the same as `bodySegmentation.LEFT_HAND`.)
+`data`配列には、画像のセグメンテーション結果が含まれ、入力画像の各ピクセルに 1 つの数値として格納されます。 (BodyPixモデルでは、右手はたとえば 11 となり、 `bodySegmentation.LEFT_HAND` と同じになります。)
 
   _results.mask_ under different _maskType_ options:
-  - _background_: A mask of the background. _results.mask_ is an image with transparent pixels on the background and black pixels on the person.
-  - _body_: A mask of the person. _results.mask_ is an image with black pixels on the background and transparent pixels on the person.
-  - _parts_: **BodyPix** only. _results.mask_ is an image with white pixels on the background and various color pixels for each body part.
+  - _background_: 背景のマスク。results.maskは、背景に透明なピクセル、人物に黒いピクセルを持つ画像である。
+  - _body_: 人物のマスク。_results.mask_ は、背景が黒ピクセル、人物が透明ピクセルの画像である。
+  - _parts_: **BodyPix** のみ. _results.mask_ は、背景に白いピクセル、体の各部位に様々な色のピクセルを持つ画像である。
 
 ---
 
 ### bodySegmentation.detectStop()
 
-This method can be called after a call to `bodySegmentation.detectStart` to stop the repeating pose estimation.
+このメソッドは、'bodySegmentation.detectStart'を呼び出した後に呼び出すことで、ポーズ推定の繰り返しを停止させることができる。
 
 ```javascript
 bodySegmentation.detectStop();
@@ -319,7 +331,7 @@ bodySegmentation.detectStop();
 
 ### bodySegmentation.detect()
 
-This method asynchronously outputs a single segmentation mask on an image media when called.
+このメソッドは、呼び出されると非同期で画像メディアに単一のセグメンテーションマスクを出力します。
 
 ```javascript
 bodySegmentation.detect(media, ?callback);
@@ -327,9 +339,9 @@ bodySegmentation.detect(media, ?callback);
 
 **Parameters:**
 
-- **media**: An HTML or p5.js image, video, or canvas element to run the segmentation on.
+- **media**: セグメンテーションを実行するHTMLまたはp5.jsの画像、動画、またはcanvas
 
-- **callback(output, error)**: Optional. A callback function to handle the output of the estimation, see output example above.
+- **callback(output, error)**: オプション。 推定結果を出力を処理するためのコールバック関数。
 
 **Returns:**
-A promise that resolves to the segmentation output.
+セグメンテーション出力を解決するプロミス。

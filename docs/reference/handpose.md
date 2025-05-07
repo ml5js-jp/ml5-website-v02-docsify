@@ -5,60 +5,60 @@
   <p class="img-credit"> Image Credit: <a href="https://thenounproject.com/creator/dinosoftlab/" target="_blank" title="DinosoftLabs">DinosoftLabs</a> | <a href='mailto:info@ml5js.org'>Contribute ♥️</a> </p>
 </center>
 
-## Description
+## 説明
 
-HandPose is a machine-learning model that allows for palm detection and hand-skeleton finger tracking in the browser. It can detect multiple hands at a time and for each hand, and provides 21 2D and 3D hand keypoints that describe important locations on the palm and fingers.
+HandPoseは、ブラウザ上で手のひらの検出と手の骨格のトラッキングを可能にする機械学習モデルです。一度に複数の手を検出することができ、それぞれの手について、手のひらと指を示す21個の二次元および三次元のキーポイントを提供します。
 
-The ml5.js HandPose model is based on the [HandPose implementation](https://github.com/google/mediapipe/blob/master/docs/solutions/hands.md) by TensorFlow.js.
+ml5.jsのHandPoseモデルは、TensorFlow.jsの[HandPose](https://github.com/google/mediapipe/blob/master/docs/solutions/hands.md)実装に基づいています。
 
-The following functionality is provided:
+提供される機能:
 
-- **Hand Keypoint Detection**: HandPose can detect the 2D and 3D coordinates of 21 keypoints on a hand.
-- **Handedness**: HandPose can determine the handedness (left or right) of the detected hand.
-- **Multiple Hands**: HandPose can detect multiple hands at the same time.
+- **手のキーポイント検出**: HandPoseは、手の21のキーポイントの二次元および三次元座標を検出できます。
+- **手の左右**: HandPoseは、検出された手（左手または右手）を判定できます
+- **複数の手**: HandPoseは、複数の手を同時に検出できます。
 
 ## Quick Start
 
-Run and explore a pre-built example! [This HandPose example](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A) displays 21 hand keypoints that describe the geometry of each hand in real-time from the webcam.
+構築済みの例を実行して理解しましょう！ [This HandPose example](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A)のサンプルは、ウェブカメラからリアルタイムで各手の形状を表す21個の手のキーポイントを表示します。
 
 </br>
 
 [DEMO](iframes/handpose ":include :type=iframe width=100% height=550px")
 
-## Examples
+## 例
 
-- [HandPose Keypoints](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A): Draw the keypoints of the detected hand from the webcam.
-- [HandPose Single Image](https://editor.p5js.org/ml5/sketches/8VK_l3XwE): Detect the keypoints of the hand from a single image.
-- [HandPose Parts](https://editor.p5js.org/ml5/sketches/DNbSiIYKB): Draw specific hand parts of the detected hand.
-- [HandPose Start-stop](https://editor.p5js.org/ml5/sketches/W9vFFT5RM): Start and stop the detection of the hand.
+- [HandPose Keypoints](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A): ウェブカメラから検出された手のキーポイントを描画します。
+- [HandPose Single Image](https://editor.p5js.org/ml5/sketches/8VK_l3XwE): 一枚の画像から手のキーポイントを検出します。
+- [HandPose Parts](https://editor.p5js.org/ml5/sketches/DNbSiIYKB): 検出された手の特定の部分を描画します。
+- [HandPose Start-stop](https://editor.p5js.org/ml5/sketches/W9vFFT5RM): 手の検出を開始，および停止します。
 
 ## Step-by-Step Guide
 
-Now, let's together build the [HandPose Keypoints example](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A) from scratch, and in the process, learn how to use the HandPose model.
+[HandPose Keypoints example](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A) の製作を通じて、HandPose modelの使い方を学びましょう。
 
-### Create a new project
+### 新しいプロジェクトを作成する
 
-To follow along, start by creating an empty project in the [p5.js web editor](https://editor.p5js.org/).
+p5.js web editor で新規プロジェクトを作成します．
 
-### Set up ml5.js
+### ml5.jsをセットアップする
 
-Import the ml5.js library in your `index.html` file.
+index.htmlにml5.jsをインポートします。
 
 ```html
 <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
 ```
 
-?> If you are not familiar with how to import the ml5.js library and need more detailed guidance, please check out our [Getting Started](/?id=set-up-ml5js) page.
+?> ml5.jsライブラリのインポート方法がよくわからず、より詳細なガイダンスが必要な場合は、[Getting Started](/?id=set-up-ml5js)のページをご覧ください。
 
-### Load model
+### モデルを読み込む
 
-Let's open the `sketch.js` file and define a variable to store the HandPose model.
+`sketch.js`ファイルを開き、HandPoseモデルを格納する変数を定義しましょう。
 
 ```javascript
 let handPose;
 ```
 
-Now, we can load the HandPose model in the `preload` function. Using the `preload` function ensures that the model is loaded before the `setup` and `draw` functions are called.
+ここで，`preload`関数でHandPoseモデルをロードします。`preload`関数を使うことで、`setup`関数と`draw`関数が呼ばれる前にモデルが読み込まれるようになります。
 
 ```javascript
 function preload() {
@@ -66,22 +66,22 @@ function preload() {
 }
 ```
 
-### Fetch webcam video
+### Fetch webcam videoウェブカメラの映像の取得する
 
-Let's define a variable `video` to store the webcam video.
+ウェブカメラの映像を保存するために変数`video`を定義しよう。
 
 ```javascript
 let video;
 ```
 
-Resize the canvas dimensions to 640x480, a common resolution for webcams.
+キャンバスの寸法を、ウェブカメラの一般的な解像度である640x480にリサイズします。
 
 ```javascript
 function setup() {
   createCanvas(640, 480);
 ```
 
-Fetch the webcam video, resize it to fit the canvas, and hide it from the display.
+ウェブカメラのビデオを取得し、キャンバスに合うようにリサイズし、ディスプレイから非表示にします。
 
 ```javascript
   // Create the video and hide it
@@ -91,15 +91,15 @@ Fetch the webcam video, resize it to fit the canvas, and hide it from the displa
 }
 ```
 
-### Detect hand keypoints with the model
+### モデルで手のキーポイントを検出
 
-Before we use the HandPose model to detect hand keypoints, we need to define a variable `hands` to store the detected hands. Note that the `hands` variable will store an array of detected hands, and each hand has a property `keypoints` that will contain an array of keypoints.
+HandPoseモデルを使用して手のキーポイントを検出する前に、検出された手を格納する変数`hands`を定義する必要があります。変数`hands`は検出された手の配列を格納します．各手はキーポイントの配列を格納する変数`keypoints`を持つことに注意してください。
 
 ```javascript
 let hands = [];
 ```
 
-To start detecting the keypoints of the hands, in the `setup` function, we need to call the `detectStart` method of the `handPose` object. This method takes the webcam video as input and a callback function to handle the output.
+手のキーポイントの検出を開始するには、`setup`関数の中で、`handPose`オブジェクトの`detectStart`メソッドを呼び出す必要があります。このメソッドは、入力としてウェブカメラのビデオと出力を処理するためにコールバック関数を受け取ります。
 
 ```javascript
 function setup() {
@@ -111,7 +111,8 @@ function setup() {
 }
 ```
 
-The `gotHands()` function is a callback function that will be called when the `handPose.detectStart()` method detects hands. Once the hands are detected, the output `results` will be passed to `gotHands()`, and then saved to the `hands` variable.
+`gotHands()` 関数は、`handPose.detectStart()` メソッドが手を検出したときに呼び出されるコールバック関数です。手が検出されると、`results`が `gotHands()` に渡され、`hands` 変数に保存されます。
+
 
 ```javascript
 // Callback function for when handPose outputs data
@@ -121,16 +122,16 @@ function gotHands(results) {
 }
 ```
 
-### Draw the keypoints on the canvas
+### キャンバスにキーポイントを描画する
 
-Before we draw the keypoints, we need to draw the webcam video on the canvas.
+キーポイントを描画する前に、ウェブカメラの映像をキャンバスに描画する必要があります。
 
 ```javascript
 function draw() {
   image(video, 0, 0, width, height);
 ```
 
-Now, we can loop through the `hands` array, fetch the `i`th dectected hand, and store it in the `hand` variable.
+ここで、`hands`配列をループし、検出された`i`番目の要素を取得し、`hand`変数に格納することができる。
 
 ```javascript
   // Draw all the tracked hand points
@@ -138,14 +139,15 @@ Now, we can loop through the `hands` array, fetch the `i`th dectected hand, and 
     let hand = hands[i];
 ```
 
-Iterate though all the keypoints of the `i`th detected hand, fetch the `j`th keypoint, and store it in the `keypoint` variable.
+`i`番目に検出されたハンドのすべてのキーポイントを反復処理し、`j`番目のキーポイントを取得し、変数`keypoint`に格納する。
+
 
 ```javascript
     for (let j = 0; j < hand.keypoints.length; j++) {
       let keypoint = hand.keypoints[j];
 ```
 
-Finally, draw a green circle at the location of the `j`th keypoint.
+最後に、`j`番目のキーポイントの位置に緑色の円を描く。
 
 ```javascript
       fill(0, 255, 0);
@@ -156,20 +158,21 @@ Finally, draw a green circle at the location of the `j`th keypoint.
 }
 ```
 
-Note we are iterating through all the keypoints (`j` is ranging from 0 to the length of the keypoints array) of the detected hand (`i` is ranging from 0 to the length of the hands array). This will result in green landmarks on all detected hand(s) in the webcam video.
+検出された手（`i`は0からhandsの長さまで）のすべてのキーポイント（`j`は0からキーポイント配列の長さまで）を繰り返し処理することに注意してください。この結果、ウェブカメラのビデオで検出されたすべての手のランドマークが緑色になります。
 
-### Run your sketch
+### スケッチを実行する
 
-Voila! You have successfully built the HandPose Keypoints example. Press the <img class="inline-img" src="assets/facemesh-arrow-forward.png" alt="run button icon" aria-hidden="true"> `run` button to see the code in action. You can also find the [complete code](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A) in the p5.js web editor.
+ほら！これでHandPose Keypointsの例の作成は成功です。 <img class="inline-img" src="assets/facemesh-arrow-forward.png" alt="run button icon" aria-hidden="true"> `実行` 
+ボタンを押して、コードの動作を確認してください。[完全なコード](https://editor.p5js.org/ml5/sketches/QGH3dwJ1A)はp5.jsウェブエディタでも見ることができます。
 
-?> If you have any questions or spot something unclear in this step-by-step code guide, we'd love to hear from you! Join us on [Discord](https://discord.com/invite/3CVauZMSt7) and let us know how we can make it better.
+?> このステップ・バイ・ステップのコード・ガイドで不明な点や質問があれば、ぜひお寄せください！Discord](https://discord.com/invite/3CVauZMSt7)に参加して、どうすればもっと良くなるか教えてください。
 
 ## Properties
 
 ### handPose.model
 
 - **Description**
-  - The TensorFlow.js model used for hand pose detection.
+  - 手のポーズ検出に使用するTensorFlow.jsモデル。
 - **Type**
   - tf.LayersModel
 
@@ -178,7 +181,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.config
 
 - **Description**
-  - Configuration options provided by the user for the model.
+  - ユーザーがモデルに対して提供するオプション。
 - **Type**
   - Object
 
@@ -187,7 +190,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.runtimeConfig
 
 - **Description**
-  - Configuration options related to the runtime behavior of the model.
+  - モデルの実行時の動作に関するオプション。
 - **Type**
   - Object
 
@@ -196,7 +199,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.detectMedia
 
 - **Description**
-  - The media element (image, video, or canvas) on which hand pose detection is performed.
+  - 手のポーズ検出を行うメディア要素（画像、ビデオ、キャンバス）。
 - **Type**
   - HTMLElement
 
@@ -205,7 +208,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.detectCallback
 
 - **Description**
-  - The callback function to handle hand pose detection results.
+  - 手のポーズ検出結果を処理するコールバック関数。
 - **Type**
   - Function
 
@@ -214,7 +217,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.detecting
 
 - **Description**
-  - A flag indicating whether the detection loop is currently running.
+  - 検出ループが現在実行中かどうかを示すフラグ。
 - **Type**
   - Boolean
 
@@ -223,7 +226,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.signalStop
 
 - **Description**
-  - A flag used to signal the detection loop to stop.
+  - 検出ループの停止を知らせるためのフラグ。
 - **Type**
   - Boolean
 
@@ -232,7 +235,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.prevCall
 
 - **Description**
-  - Tracks the previous call to `detectStart` or `detectStop` to handle warnings.
+  - 警告を処理するために `detectStart` または `detectStop` を呼び出したことを追跡する。
 - **Type**
   - String
 
@@ -241,7 +244,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 ### handPose.ready
 
 - **Description**
-  - A promise that resolves when the model has loaded.
+  - モデルがロードされたときに解決されるpromise
 - **Type**
   - Promise
 
@@ -249,7 +252,7 @@ Voila! You have successfully built the HandPose Keypoints example. Press the <im
 
 ### ml5.handPose()
 
-This method is used to initialize the handPose object.
+このメソッドは、handPose オブジェクトを初期化するために使用されます。
 
 ```javascript
 const handPose = ml5.handPose(?options, ?callback);
@@ -257,7 +260,7 @@ const handPose = ml5.handPose(?options, ?callback);
 
 **Parameters:**
 
-- **options**: Optional. An object to change the default configuration of the model. The default and available options are:
+- **options**: オプション。 モデルのデフォルト設定を変更するオブジェクト。デフォルトで利用可能なオプションは以下の通りです。:
 
   ```javascript
   {
@@ -272,39 +275,39 @@ const handPose = ml5.handPose(?options, ?callback);
 
   Options for hand detection:
 
-  - _maxHands_ - Optional
-    - Number: The maximum number of hands to detect. Default: 2.
-  - _modelType_ - Optional
-    - String: The type of model to use: "lite" or "full". Default: "full".
-  - _flipped_ - Optional
-    - Boolean: Flip the result data horizontally. Default: false.
-  - _runtime_ - Optional
-    - String: The runtime of the model: "mediapipe" or "tfjs". Default: "tfjs".
+  - _maxHands_ - オプション
+    - Number: 検出する手の最大数。デフォルト：2
+  - _modelType_ - オプション
+    - String: 使用するモデルのタイプ： 「lite 「または 」full"。デフォルト：「full」。
+  - _flipped_ - オプション
+    - Boolean: 結果データを水平に反転させます。デフォルト：false。
+  - _runtime_ - オプション
+    モデルのランタイム： “mediapipe” または “tfjs”。デフォルトは “tfjs”。
 
   For using custom or offline models:
 
-  - _solutionPath_ - Optional
-    - String: The file path or URL to the model. Only used when using "mediapipe" runtime.
-  - _detectorModelUrl_ - Optional
-    - String: The file path or URL to the hand detector model. Only used when using "tfjs" runtime.
-  - _landmarkModelUrl_ - Optional
-    - String: The file path or URL to the hand landmark model. Only used when using "tfjs" runtime.
+  - _solutionPath_ - オプション
+    - String: モデルのファイルパスまたはURL。ランタイムが"mediapipe"の時のみ使用。
+  - _detectorModelUrl_ - オプション
+    - String: hand detectorモデルのファイルパスまたはURL。ランタイムが"tfjs"の時のみ使用。
+  - _landmarkModelUrl_ - オプション
+    - String: hand landmarkモデルのファイルパスまたはURL。ランタイムが”tfjs “の時のみ使用。
 
-  More info on options [here](https://github.com/tensorflow/tfjs-models/tree/master/hand-pose-detection/src/mediapipe#create-a-detector) for "mediapipe" runtime.
+  "mediapipe"ランタイムのオプションについての詳細は[こちら](https://github.com/tensorflow/tfjs-models/tree/master/hand-pose-detection/src/mediapipe#create-a-detector)。
 
-  More info on options [here](https://github.com/tensorflow/tfjs-models/tree/master/hand-pose-detection/src/tfjs#create-a-detector) for "tfjs" runtime.
+  "tfjs"ランタイムのオプションについての詳細は[こちら](https://github.com/tensorflow/tfjs-models/tree/master/hand-pose-detection/src/tfjs#create-a-detector。
 
-- **callback(handPose, error)**: Optional. A function to run once the model has been loaded. Alternatively, call `ml5.handPose()` within the p5 `preload` function.
+- **callback(handPose, error)**: オプション. モデルがロードされたら実行する関数。または、p5 `preload`関数内で`ml5.handPose()`を呼び出します。
 
 **Returns:**
 
-- **Object**: The handPose object. This object contains the methods to start and stop the hand pose detection process.
+- **Object**: The handPose オブジェクト。このオブジェクトは、手のポーズ検出処理を開始したり停止したりするメソッドを持っている
 
 ---
 
 ### handPose.detectStart()
 
-This method repeatedly outputs hand estimations on an image media through a callback function.
+このメソッドは、コールバック関数を通して画像メディア上の手の推定値を繰り返し出力する.
 
 ```javascript
 handPose.detectStart(media, callback);
@@ -312,8 +315,8 @@ handPose.detectStart(media, callback);
 
 **Parameters:**
 
-- **media**: An HTML or p5.js image, video, or canvas element to run the estimation on.
-- **callback(results, error)**: A callback function to handle the output of the estimation. See below for an example output passed into the callback function:
+- **media**: 推定を実行するHTMLまたはp5.jsの画像、動画、またはcanvas要素
+- **callback(results, error)**: 推定の出力を処理するコールバック関数。コールバック関数に渡される出力の例は以下を参照:
 
   ```javascript
   [
@@ -330,7 +333,7 @@ handPose.detectStart(media, callback);
   ]
   ```
 
-  See the diagram below for the position of each keypoint.
+  各キーポイントの位置は下図を参照。
 
   <center>
       <img alt="handPose keypoints diagram" width="600" src="assets/handpose-keypoints-map.png">
@@ -340,13 +343,13 @@ handPose.detectStart(media, callback);
 
 ### handPose.detectStop()
 
-This method can be called to stop the continuous pose estimation process.
+このメソッドは、連続的なポーズ推定プロセスを停止するために用いる。
 
 ```javascript
 handPose.detectStop();
 ```
 
-For example, you can toggle the hand pose estimation with click event in p5.js by using this function as follows:
+例えば、p5.jsのクリックイベントで手のポーズ推定を切り替えるには、この関数を次のように使います:
 
 ```javascript
 // Toggle detection when mouse is pressed
@@ -370,7 +373,7 @@ function toggleDetection() {
 
 ### handPose.detect()
 
-This method asynchronously outputs a single hand estimation on an image media when called.
+このメソッドは、呼び出されると非同期で画像メディア上に1つの手の推定値を出力します。
 
 ```javascript
 handPose.detect(media, ?callback);
@@ -378,6 +381,6 @@ handPose.detect(media, ?callback);
 
 **Parameters:**
 
-- **media**: An HTML or p5.js image, video, or canvas element to run the estimation on.
+- **media**: 推定を実行するHTMLまたはp5.jsの画像、動画、またはcanvas要素。
 
-- **callback(results, error)**: Optional. A callback function to handle the output of the estimation, see output example above.
+- **callback(results, error)**: オプション. 推定結果の出力を処理するためのコールバック関数。
